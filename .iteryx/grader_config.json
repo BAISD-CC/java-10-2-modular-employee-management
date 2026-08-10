@@ -1,0 +1,155 @@
+{
+  "schema": "iteryx/java-grader/v1",
+
+  "assignmentName": "Ch. 10 Challenge 2",
+
+  "project": {
+    "workingDirectory": ".",
+    "mainFile": "src/EmployeeManager.java",
+    "mainClass": "EmployeeManager",
+    "outputDirectory": ".iteryx/out",
+    "compileCommand": [
+      "javac",
+      "-d",
+      ".iteryx/out",
+      "src/Employee.java",
+      "src/Astronaut.java",
+      "src/EmployeeManager.java"
+    ],
+    "runCommand": [
+      "java",
+      "-cp",
+      ".iteryx/out",
+      "EmployeeManager"
+    ]
+  },
+
+  "settings": {
+    "compileTimeoutSeconds": 30,
+    "runTimeoutSeconds": 10,
+    "defaultCaseSensitive": false,
+    "defaultNormalizeWhitespace": true
+  },
+
+  "helpTopics": {
+    "inheritance": {
+      "title": "Inheritance and Modular Design",
+      "whereToLook": [
+        "Check that Astronaut is declared with 'extends Employee' so it inherits name, ID, and salary instead of redefining them.",
+        "Check that both Astronaut constructors call super(...) so the Employee part of the object gets built.",
+        "Astronaut should only add mission name and mission role — everything else comes from Employee."
+      ]
+    },
+    "scanner-input": {
+      "title": "Reading Input with Scanner",
+      "whereToLook": [
+        "Check that you created one Scanner and used it to read every value the user enters.",
+        "Check that each prompt is printed before you read the matching value.",
+        "If a value after the salary looks empty or wrong, check whether a leftover newline is being read into the next field."
+      ]
+    },
+    "encapsulation": {
+      "title": "Fields, Constructors, Getters, and Setters",
+      "whereToLook": [
+        "Check that Employee and Astronaut store their data in fields, not just local variables in EmployeeManager.",
+        "Check that your no-arg constructors set fields to the empty-string/0.0 defaults described in the README.",
+        "Check that your overload constructors assign every parameter to the matching field.",
+        "Check that EmployeeManager builds its output using the getter methods on the Astronaut object, not the original input variables."
+      ]
+    },
+    "output-formatting": {
+      "title": "Displaying the Astronaut's Data",
+      "whereToLook": [
+        "Check that each line of output uses the exact label shown in the README, followed by a colon, a space, and the value.",
+        "Check that the five lines are printed in the same order shown in the README.",
+        "Check that you are printing the astronaut built from user input, not the no-arg one."
+      ]
+    }
+  },
+
+  "sourceChecks": [
+    {
+      "name": "Uses Scanner for input",
+      "type": "regex",
+      "pattern": "\\bScanner\\b",
+      "points": 2,
+      "message": "This challenge requires you to use a Scanner to read the astronaut's information from the user."
+    },
+    {
+      "name": "Creates an Astronaut with the no-arg constructor",
+      "type": "regex",
+      "pattern": "new\\s+Astronaut\\s*\\(\\s*\\)",
+      "points": 2,
+      "message": "The README asks you to create a second Astronaut object using the no-arg constructor to confirm it works. Look for a line like 'new Astronaut()' in EmployeeManager."
+    },
+    {
+      "name": "Creates an Astronaut with the overload constructor",
+      "type": "regex",
+      "pattern": "new\\s+Astronaut\\s*\\(\\s*\\S",
+      "points": 1,
+      "message": "Check that you are creating an Astronaut object with the overload constructor, passing it the name, ID, salary, mission name, and mission role."
+    }
+  ],
+
+  "tests": [
+    {
+      "name": "Displays astronaut data entered by the user (Buzz Aldrin)",
+      "input": "Buzz Aldrin\nAST001\n100000.0\nApollo 11\nLunar Module Pilot\n",
+      "expectedOutput": "Name: Buzz Aldrin\nID: AST001\nSalary: 100000.0\nMission Name: Apollo 11\nMission Role: Lunar Module Pilot",
+      "comparison": "included",
+      "points": 5,
+      "message": "Check that your program reads all five prompts with Scanner, builds an Astronaut with the overload constructor, and displays its data using the getter methods in the exact order and label format shown in the README.",
+      "possibleErrors": [
+        {
+          "type": "no_output",
+          "message": "No output was produced. Make sure Employee.java and Astronaut.java both compile (they need a class declaration, fields, and constructors) and that EmployeeManager actually prints the astronaut's data."
+        }
+      ]
+    },
+    {
+      "name": "Displays astronaut data entered by the user (Sally Ride)",
+      "input": "Sally Ride\nA100\n82500.5\nSTS-7\nMission Specialist\n",
+      "expectedOutput": "Name: Sally Ride\nID: A100\nSalary: 82500.5\nMission Name: STS-7\nMission Role: Mission Specialist",
+      "comparison": "included",
+      "points": 5,
+      "message": "Your output should reflect the values entered for this run, not the example from the README.",
+      "possibleErrors": [
+        {
+          "type": "hardcoded_output_hint",
+          "badText": "Buzz Aldrin",
+          "message": "Your output still contains the README's example name even though different astronaut data was entered. Make sure you are printing the values read from Scanner rather than the README example."
+        }
+      ]
+    },
+    {
+      "name": "Displays astronaut data entered by the user (Mae Jemison)",
+      "input": "Mae Jemison\nA205\n91000.25\nSTS-47\nScience Mission Specialist\n",
+      "expectedOutput": "Name: Mae Jemison\nID: A205\nSalary: 91000.25\nMission Name: STS-47\nMission Role: Science Mission Specialist",
+      "comparison": "included",
+      "points": 5,
+      "message": "Your output should reflect the values entered for this run, not a previous run's values.",
+      "possibleErrors": [
+        {
+          "type": "hardcoded_output_hint",
+          "badText": "Buzz Aldrin",
+          "message": "Your output still contains the README's example name even though different astronaut data was entered. Make sure you are printing the values read from Scanner rather than the README example."
+        }
+      ]
+    },
+    {
+      "name": "Displays astronaut data entered by the user (Jose Hernandez)",
+      "input": "Jose Hernandez\nA310\n45000.0\nSTS-128\nMission Specialist\n",
+      "expectedOutput": "Name: Jose Hernandez\nID: A310\nSalary: 45000.0\nMission Name: STS-128\nMission Role: Mission Specialist",
+      "comparison": "included",
+      "points": 5,
+      "message": "Your output should reflect the values entered for this run, not a previous run's values.",
+      "possibleErrors": [
+        {
+          "type": "hardcoded_output_hint",
+          "badText": "Buzz Aldrin",
+          "message": "Your output still contains the README's example name even though different astronaut data was entered. Make sure you are printing the values read from Scanner rather than the README example."
+        }
+      ]
+    }
+  ]
+}

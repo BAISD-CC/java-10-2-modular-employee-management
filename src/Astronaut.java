@@ -2,6 +2,8 @@
    which is a specific type of employee, for the
    Employee and Astronaut Classes programming challenge. */
 
+    // Create a class for Astronaut that extends the Employee class
+
     // Create String attributes for missionName and missionRole
 
     /* The no-arg constructor initializes the object with
